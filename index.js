@@ -5,11 +5,30 @@
 const electron = require("electron")
 // Module to control application life.
 const {app, Menu, Tray} = electron
+const ipc = electron.ipcMain
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 const url = require('url')
+
+const notifier = require("node-notifier")
+
+notifier.notify({
+    'title': 'WebCook Electron',
+    'message': 'This is a sample notification',
+    'icon': path.join(__dirname, 'logo.png')
+});
+
+function sampleNotification() {
+    notifier.notify({
+        'title': 'Thanks for loging in..',
+        'message': 'This is a sample notification',
+        'icon': path.join(__dirname, 'logo.png')
+    })
+}
+
+ipc.on('sample-notification', sampleNotification);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

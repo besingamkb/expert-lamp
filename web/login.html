@@ -56,6 +56,7 @@
     <!-- Insert this line after script imports -->
 
     <script>
+        var ipc = require('electron').ipcRenderer;
 
         $(document).ready(function() {
             $('.ui.form').form({
@@ -88,19 +89,9 @@
                     }
                 },
                 onSuccess: function(e) {
-                    console.log("yow");
+                    ipc.send('sample-notification')
                 }
             });
-
-//            $("#loginSubmit").click(function(e) {
-//                var email = $("#email").val();
-//                var password = $("#password").val();
-//
-//                console.log("email " + email + " " + " password " + password);
-//
-//                e.preventDefault();
-//                e.stopPropagation();
-//            });
 
             $(".ui.form").submit(function(e) {
                 return false;
